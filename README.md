@@ -9,6 +9,7 @@ This starter now includes:
 - Postgres job persistence
 - Real provider adapters for image/video/TTS (Replicate + ElevenLabs)
 - LangGraph checkpointing with Redis (hot cache) + Postgres (durable)
+- Two UI options: Streamlit (`ui/streamlit_app.py`) and React (`ui/react`)
 
 ## Project status (as of 2026-06-14)
 
@@ -145,6 +146,39 @@ UI features:
 - job status polling
 - result video preview
 - resume button (`POST /jobs/{job_id}/resume`)
+
+## React UI (Alternative)
+
+Run backend first:
+
+```bash
+./.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+```
+
+In another terminal:
+
+```bash
+cd ui/react
+npm install
+npm start
+```
+
+React UI runs at:
+- `http://localhost:3000`
+
+Optional: set backend URL via env var before starting React UI:
+
+```bash
+cd ui/react
+REACT_APP_API_BASE_URL=http://127.0.0.1:8000 npm start
+```
+
+React UI features:
+- submit form
+- job status polling (manual + auto)
+- result video preview
+- resume button (`POST /jobs/{job_id}/resume`)
+- responsive dark theme with Tailwind CSS
 
 ## Important notes
 
