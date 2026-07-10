@@ -1,0 +1,5 @@
+file /Users/jdsingh/video_agent/data/outputs/tmp_3cdaafdb-ebf1-4a6b-9607-3c43da55fdd7/clip_001.mp4
+file /Users/jdsingh/video_agent/data/outputs/tmp_3cdaafdb-ebf1-4a6b-9607-3c43da55fdd7/clip_002.mp4
+file /Users/jdsingh/video_agent/data/outputs/tmp_3cdaafdb-ebf1-4a6b-9607-3c43da55fdd7/clip_003.mp4
+file /Users/jdsingh/video_agent/data/outputs/tmp_3cdaafdb-ebf1-4a6b-9607-3c43da55fdd7/clip_004.mp4
+file /Users/jdsingh/video_agent/data/outputs/tmp_3cdaafdb-ebf1-4a6b-9607-3c43da55fdd7/clip_005.mp4

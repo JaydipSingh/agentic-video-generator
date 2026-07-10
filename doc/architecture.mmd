@@ -1,0 +1,46 @@
+flowchart TB
+    U[User Story / Context] --> API[FastAPI API\nPOST /generate]
+    UI[Streamlit UI] --> API
+    API --> Q[Redis Queue]
+    Q --> W[Worker Loop]
+    W --> LG[LangGraph Orchestrator]
+
+    LG --> D[Director Agent]
+    D --> S[Storyboard Agent]
+    S --> A[Asset Generation Agent]
+    A --> V[Voice Agent]
+    V --> E[Editor Agent]
+    E --> C[Critic Agent]
+
+    D -. writes plan .-> PG[(Postgres Job Store)]
+    S -. updates prompts .-> PG
+    A -. asset status .-> PG
+    V -. voice status .-> PG
+    E -. render URL .-> PG
+    C -. quality status .-> PG
+    LG -. checkpoints .-> CPG[(Postgres Checkpoints)]
+    LG -. checkpoint cache .-> CR[(Redis Checkpoint Cache)]
+
+    A --> P[Provider Layer]
+    P --> RI[Replicate Image/Video]
+    P --> EL[ElevenLabs TTS]
+    P --> FB[Fallback Providers]
+
+    E --> FF[ffmpeg Renderer]
+    FF --> OUT[(data/outputs/*.mp4)]
+
+    API --> JS[GET /jobs/:job_id]
+    API --> RS[POST /jobs/:job_id/resume]
+    JS --> PG
+    RS --> Q
+
+    K[Provider API Keys\nREPLICATE_API_TOKEN\nELEVENLABS_API_KEY] --> P
+
+    classDef done fill:#dcfce7,stroke:#16a34a,color:#14532d;
+    classDef partial fill:#fef9c3,stroke:#ca8a04,color:#713f12;
+    classDef pending fill:#fee2e2,stroke:#dc2626,color:#7f1d1d;
+
+    class API,Q,W,PG,CPG,CR,FF,OUT,JS,RS,LG,UI done;
+    class D,S,A,V,E,P partial;
+    class K pending;
+    class C pending;
