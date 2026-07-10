@@ -18,7 +18,7 @@ This project implements an agentic application that converts a user story into a
 \section*{Current Architecture}
 \begin{itemize}[leftmargin=*]
   \item \textbf{API Layer}: FastAPI endpoints for job creation and job status polling.
-  \item \textbf{UI Layer}: Streamlit frontend for submission, polling, resume action, and video preview.
+  \item \textbf{UI Layer}: Streamlit frontend (Python) and React frontend (JavaScript) for submission, polling, resume action, and video preview.
   \item \textbf{Orchestration Layer}: LangGraph state machine with nodes: director, storyboard, asset generation, voice synthesis, editor, and critic.
   \item \textbf{Persistence Layer}: Postgres for durable job state and metadata.
   \item \textbf{Queue Layer}: Redis list queue for asynchronous job processing.
@@ -38,6 +38,7 @@ This project implements an agentic application that converts a user story into a
   \item Fallback behavior when provider credentials are absent.
   \item LangGraph checkpointing after each successful node execution.
   \item Streamlit UI with submit form, job polling, resume button, and video preview.
+  \item React UI (modern JavaScript-based alternative) with dark theme, responsive design, and Tailwind CSS styling.
 \end{enumerate}
 
 \section*{Current Readiness and Unblocker}
@@ -71,6 +72,17 @@ If a health probe returns connection refused, the API process is not running. Re
   \item Need observability: tracing, metrics, and per-node latency/cost reporting.
 \end{itemize}
 
+\section*{UI Options}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Streamlit UI} (\texttt{ui/streamlit\_app.py}): Python-based, simple built-in hot reload, minimal setup.
+  \item \textbf{React UI} (\texttt{ui/react/}): Modern JavaScript framework, fully customizable styling, Tailwind CSS dark theme, responsive mobile design.
+  \begin{itemize}
+    \item Setup: \texttt{cd ui/react \&\& npm install \&\& npm start}
+    \item Runs at \texttt{http://localhost:3000}
+    \item Production build: \texttt{npm run build}
+  \end{itemize}
+\end{itemize}
+
 \section*{Recommended Next Steps}
 \begin{enumerate}[leftmargin=*]
   \item Add valid provider keys and run end-to-end quality test with real providers.
@@ -78,6 +90,7 @@ If a health probe returns connection refused, the API process is not running. Re
   \item Add retry/backoff policy and failure classification per node.
   \item Add subtitle generation and timeline-level QA checks.
   \item Add CI checks and integration tests against Redis/Postgres.
+  \item Deploy React UI to CDN or static hosting (Netlify, Vercel, etc.) for standalone frontend.
 \end{enumerate}
 
 \appendix

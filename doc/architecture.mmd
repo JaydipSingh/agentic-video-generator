@@ -1,6 +1,7 @@
 flowchart TB
     U[User Story / Context] --> API[FastAPI API\nPOST /generate]
     UI[Streamlit UI] --> API
+    REACT[React UI] --> API
     API --> Q[Redis Queue]
     Q --> W[Worker Loop]
     W --> LG[LangGraph Orchestrator]
@@ -40,7 +41,7 @@ flowchart TB
     classDef partial fill:#fef9c3,stroke:#ca8a04,color:#713f12;
     classDef pending fill:#fee2e2,stroke:#dc2626,color:#7f1d1d;
 
-    class API,Q,W,PG,CPG,CR,FF,OUT,JS,RS,LG,UI done;
+    class API,Q,W,PG,CPG,CR,FF,OUT,JS,RS,LG,UI,REACT done;
     class D,S,A,V,E,P partial;
     class K pending;
     class C pending;
